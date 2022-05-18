@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="text"></div>
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=PT+Sans&display=swap');
+    body {
+        background-color: white;
+        font-size: 1.5rem;
+    }
+    
+    .text {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2em;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+
+<script>
+    Url = new URL(window.location.href);
+    url = new URLSearchParams(Url.search);
+    var text = url.get('text');
+    if (text != null) {
+        text = "Thank You " + text;
+    } else {
+        text = 'Thank You!';
+    }
+
+    bg = url.get('bg');
+    if (bg != null) {
+        if (!bg.toString().startsWith('rgb')) {
+            document.body.style.backgroundColor = '#' + bg;
+        }
+    }
+
+    var fg = url.get('fg');
+
+    if (fg != null) {
+        if (!fg.toString().startsWith('rgb')) {
+            document.querySelector('.text').style.color = '#' + fg;
+        }
+    }
+
+    var app = document.querySelector('.text');
+
+    var typewriter = new Typewriter(app, {
+        loop: true,
+        delay: 75,
+    });
+
+    typewriter
+        .typeString(text)
+        .callFunction(function() {
+            typewriter.stop();
+        })
+        .start();
+</script>
+
+</html>
